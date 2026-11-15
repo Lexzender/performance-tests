@@ -24,8 +24,8 @@ open_credit_card_account_response_data = open_credit_card_account_response.json(
 
 # Выполнение операции покупки
 make_purchase_operation_payload = {
-    "status": "COMPLETED",
-    "amount": 100,
+    "status": "IN_PROGRESS",
+    "amount": 77.99,
     "cardId": open_credit_card_account_response_data["account"]["cards"][0]["id"],
     "accountId": open_credit_card_account_response_data["account"]["id"],
     "category": "test"
@@ -39,3 +39,13 @@ make_purchase_up_operation_response_data = make_purchase_operation_response.json
 # Вывод результатов в консоль
 print("Make purchase operation response:", make_purchase_up_operation_response_data)
 print("Make purchase operation status code:", make_purchase_operation_response.status_code)
+
+#Получить чек по операции
+get_operation_id_response = httpx.get(
+    f"http://localhost:8003/api/v1/operations/operation-receipt/{make_purchase_up_operation_response_data['operation']['id']}")
+
+get_operation_id_response_data = get_operation_id_response.json()
+
+# Вывод результатов в консоль
+print("Get operation id response:", get_operation_id_response_data)
+print("Get operation id status code:", get_operation_id_response.status_code)
