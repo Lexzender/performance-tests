@@ -9,7 +9,7 @@ class BaseOperationRequestDict(TypedDict):
     Общие поля запроса на создание операции.
     """
     status: str
-    amount: int
+    amount: float
     accountId: str
     cardId: str
 
