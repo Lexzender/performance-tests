@@ -35,7 +35,7 @@ class GetOperationsQueryDict(TypedDict):
 
 
 class GetOperationResponseDict(TypedDict):
-    operation: list[OperationDict]
+    operation: OperationDict
 
 
 class GetOperationsResponseDict(TypedDict):
@@ -52,9 +52,9 @@ class GetOperationReceiptResponseDict(TypedDict):
 
 
 class OperationsSummaryDict(TypedDict):
-    spentAmount: str
-    receivedAmount: str
-    cashbackAmount: str
+    spentAmount: float
+    receivedAmount: float
+    cashbackAmount: float
 
 
 class GetOperationsSummaryResponseDict(TypedDict):
@@ -248,7 +248,7 @@ class OperationsGatewayHTTPClient(HTTPClient):
         response = self.get_operations_api(query)
         return response.json()
 
-    def get_operations_summary(self, account_id) -> GetOperationsSummaryResponseDict:
+    def get_operations_summary(self, account_id: str) -> GetOperationsSummaryResponseDict:
         query = GetOperationsSummaryQueryDict(accountId=account_id)
         response = self.get_operations_summary_api(query)
         return response.json()
